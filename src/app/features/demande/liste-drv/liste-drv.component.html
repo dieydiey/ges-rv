@@ -1,0 +1,75 @@
+<main class="container">
+
+  <div class="page-header">
+    <h1>Mes demandes de RV</h1>
+    <p>Suivez l'état de vos demandes de rendez-vous médicaux</p>
+  </div>
+
+  <div class="demands-list">
+
+    <div class="demand-card" *ngFor="let d of demandes">
+
+      <div class="demand-header">
+        <div class="demand-title">
+          <h3>{{ d.titre }}</h3>
+          <p class="demand-meta">
+            Demande #{{ d.id }} • Créée le {{ d.dateCreation }}
+          </p>
+        </div>
+
+        <span
+          class="status-badge"
+          [ngClass]="{
+            'status-pending': d.statut === 'pending',
+            'status-approved': d.statut === 'approved',
+            'status-rejected': d.statut === 'rejected'
+          }"
+        >
+          {{ getStatutLabel(d.statut) }}
+        </span>
+      </div>
+
+      <div class="demand-details">
+        <div class="detail-item">
+          <div class="detail-icon">👨‍⚕️</div>
+          <div>
+            <div class="detail-label">Médecin</div>
+            <div class="detail-value">{{ d.medecin }}</div>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon">📅</div>
+          <div>
+            <div class="detail-label">Date souhaitée</div>
+            <div class="detail-value">{{ d.dateSouhaitee }}</div>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon">🏥</div>
+          <div>
+            <div class="detail-label">Service</div>
+            <div class="detail-value">{{ d.service }}</div>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-icon">⚡</div>
+          <div>
+            <div class="detail-label">Urgence</div>
+            <div class="detail-value">{{ d.urgence }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demand-actions">
+        <button class="btn btn-primary">Voir détails</button>
+        <button class="btn btn-outline">Annuler</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
